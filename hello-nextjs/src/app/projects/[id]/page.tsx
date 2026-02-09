@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { StageIndicator } from "@/components/project/StageIndicator";
 import { SceneDescriptionList } from "@/components/scene/SceneDescriptionList";
 import { SceneImageList } from "@/components/scene/SceneImageList";
+import { SceneVideoList } from "@/components/scene/SceneVideoList";
 import { createClient } from "@/lib/supabase/server";
 import { getProjectById } from "@/lib/db/projects";
 import { redirect, notFound } from "next/navigation";
@@ -189,9 +190,10 @@ export default async function ProjectDetailPage({
             )}
 
             {project.stage === "videos" && (
-              <div className="py-4 text-center text-zinc-600 dark:text-zinc-400">
-                <p>视频生成组件将在 Task 25 中实现</p>
-              </div>
+              <SceneVideoList
+                projectId={project.id}
+                scenes={project.scenes}
+              />
             )}
 
             {project.stage === "completed" && (

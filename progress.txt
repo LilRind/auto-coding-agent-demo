@@ -1,5 +1,45 @@
 # Progress Log
 
+## 2026-02-10 - Task 25: 项目详情页 - 视频生成阶段
+
+### What was done:
+- 创建 components/scene/SceneVideoCard.tsx 分镜视频卡片组件
+  - 显示分镜序号、描述、图片、生成的视频
+  - 显示视频生成状态 (pending/processing/completed/failed)
+  - processing 状态显示进度动画
+  - 如果有视频则显示视频播放器，否则显示图片
+  - 每张卡片显示「重新生成」和「确认」按钮
+  - 已确认的视频显示绿色样式
+- 创建 components/scene/SceneVideoList.tsx 视频列表组件
+  - 显示确认进度（已确认 X / Y 个视频）
+  - 顶部显示「生成所有视频」按钮
+  - 底部显示「确认所有视频」按钮（全部完成后显示）
+  - 确认所有视频后显示"项目完成"
+  - 实现轮询机制检查视频生成状态（10分钟超时）
+- 更新 app/projects/[id]/page.tsx 项目详情页
+  - 在 videos 阶段显示 SceneVideoList 组件
+
+### Testing:
+- 运行 npm run lint 通过
+- 运行 npm run build 构建成功
+- ✅ 浏览器测试通过（使用 MCP Playwright）：
+  - 视频列表正确显示（7 个分镜）
+  - 确认进度正确显示
+  - "生成所有视频"按钮正常显示
+  - 每个分镜卡片显示"等待生成"状态
+  - 阶段指示器正确显示当前阶段
+
+### Notes:
+- 视频生成调用 POST /api/generate/video/scene/:sceneId API
+- 批量生成调用 POST /api/generate/videos API
+- 确认视频调用 POST /api/scenes/:id/confirm-video API
+- 确认所有视频调用 POST /api/scenes/confirm-all-videos API
+- 使用轮询机制（每 5 秒）检查生成状态
+- 视频生成时间较长，轮询超时设为 10 分钟
+- 确认所有视频后项目自动进入 completed 阶段
+
+---
+
 ## 2026-02-10 - Task 24: 项目详情页 - 图片生成阶段
 
 ### What was done:
