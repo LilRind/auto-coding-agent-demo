@@ -1,5 +1,38 @@
 # Progress Log
 
+## 2026-02-10 - Task 21: 创建项目页 - UI 实现
+
+### What was done:
+- 创建 components/project/CreateProjectForm.tsx 表单组件
+  - 项目标题输入框
+  - 故事内容多行输入框
+  - 10 种视频风格卡片选择器（写实、动漫、卡通、电影、水彩、油画、素描、赛博朋克、奇幻、科幻）
+  - 每种风格显示名称和描述
+  - 表单验证（标题和故事必填）
+  - 提交按钮带加载状态
+  - 错误信息显示
+- 更新 app/create/page.tsx 创建项目页
+  - 显示标题和说明
+  - 包含表单组件
+
+### Testing:
+- 运行 npm run lint 通过
+- 运行 npm run build 构建成功
+- ✅ 浏览器测试通过（使用 MCP Playwright）：
+  - 页面正确显示表单
+  - 标题输入框正常
+  - 故事输入框正常
+  - 风格选择器正常（选中状态高亮显示）
+  - 创建项目成功，跳转到项目详情页
+
+### Notes:
+- 项目详情页尚未实现（Task 22-27），创建后跳转会显示 404
+- 使用客户端组件处理表单提交
+- 调用 POST /api/projects API 创建项目
+- 创建成功后使用 router.push 跳转
+
+---
+
 ## 2026-02-10 - Task 20: 项目列表页 - UI 实现
 
 ### What was done:
