@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { StageIndicator } from "@/components/project/StageIndicator";
+import { SceneDescriptionList } from "@/components/scene/SceneDescriptionList";
 import { createClient } from "@/lib/supabase/server";
 import { getProjectById } from "@/lib/db/projects";
 import { redirect, notFound } from "next/navigation";
@@ -173,9 +174,10 @@ export default async function ProjectDetailPage({
             )}
 
             {project.stage === "scenes" && (
-              <div className="py-4 text-center text-zinc-600 dark:text-zinc-400">
-                <p>分镜描述组件将在 Task 23 中实现</p>
-              </div>
+              <SceneDescriptionList
+                projectId={project.id}
+                scenes={project.scenes}
+              />
             )}
 
             {project.stage === "images" && (

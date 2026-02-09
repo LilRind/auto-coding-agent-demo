@@ -1,5 +1,43 @@
 # Progress Log
 
+## 2026-02-10 - Task 23: 项目详情页 - 分镜描述阶段
+
+### What was done:
+- 创建 components/scene/SceneDescriptionCard.tsx 分镜描述卡片组件
+  - 显示分镜序号和描述内容
+  - 支持编辑描述内容（可修改 AI 生成的内容）
+  - 显示「确认」按钮
+  - 已确认的分镜显示绿色样式和勾选标签
+- 创建 components/scene/SceneDescriptionList.tsx 分镜列表组件
+  - 显示确认进度（已确认 X / Y 个分镜）
+  - 底部显示「重新生成分镜」按钮
+  - 底部显示「确认所有分镜」按钮
+  - 全部确认后隐藏确认按钮
+- 创建 app/api/scenes/[id]/route.ts 更新分镜描述 API
+  - PATCH /api/scenes/:id 更新分镜描述
+- 更新 app/projects/[id]/page.tsx 项目详情页
+  - 在 scenes 阶段显示 SceneDescriptionList 组件
+
+### Testing:
+- 运行 npm run lint 通过
+- 运行 npm run build 构建成功
+- ✅ 浏览器测试通过（使用 MCP Playwright）：
+  - 分镜列表正确显示（7 个分镜）
+  - 确认进度正确显示
+  - 单个分镜确认功能正常
+  - 编辑功能正常（显示文本框，取消/保存）
+  - 确认所有分镜功能正常
+  - 已确认的分镜显示绿色样式
+
+### Notes:
+- 编辑分镜描述调用 PATCH /api/scenes/:id API
+- 确认分镜调用 POST /api/scenes/:id/confirm-description API
+- 确认所有分镜调用 POST /api/scenes/confirm-all-descriptions API
+- 重新生成分镜调用 POST /api/generate/scenes/regenerate API
+- 确认后进入图片生成阶段（需要后续实现跳转逻辑）
+
+---
+
 ## 2026-02-10 - Task 22: 项目详情页 - 基础布局和阶段指示器
 
 ### What was done:
