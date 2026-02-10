@@ -1,5 +1,34 @@
 # Progress Log
 
+## 2026-02-10 - Bug Fix: 视频/图片生成卡在"生成中"状态
+
+### 问题描述:
+用户报告视频一直显示"生成中"状态，无法完成。刷新页面后状态仍然显示"生成中"。
+
+### 根本原因:
+视频/图片生成的轮询机制运行在客户端。当用户导航离开页面、刷新页面或关闭浏览器时，轮询停止。即使 Volc Engine 已经完成生成任务，由于没有轮询检查状态，数据库中的 video_status/image_status 不会更新。
+
+### What was done:
+1. **components/scene/SceneVideoList.tsx**:
+   - 添加 useEffect 钩子，在组件加载时检查是否有 video_status === "processing" 的分镜
+   - 如果有，自动恢复这些视频的轮询
+
+2. **components/scene/SceneImageList.tsx**:
+   - 添加 useEffect 钩子，在组件加载时检查是否有 image_status === "processing" 的分镜
+   - 如果有，自动恢复这些图片的轮询
+
+### Testing:
+- ✅ npm run lint 通过
+- ✅ 手动调用视频任务状态 API 确认视频已生成并下载
+- ✅ 刷新页面后视频状态正确显示为"已完成"
+
+### Notes:
+- 此修复确保即使用户离开页面，下次回来时也会自动恢复轮询
+- 对于已经卡住的任务，页面加载时会自动检查并更新状态
+- 视频任务状态 API (`/api/generate/video/task/:taskId`) 会在检查时自动下载并保存视频
+
+---
+
 ## 2026-02-10 - Bug Fix: 确认所有图片/视频后不跳转到下一阶段
 
 ### 问题描述:
