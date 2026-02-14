@@ -1,5 +1,39 @@
 # Progress Log
 
+## 2026-02-14 - Task 2: Supabase 数据库 Schema
+
+### What was done:
+1. **创建 supabase/migrations/ 目录结构**
+
+2. **编写 001_initial_schema.sql 迁移文件**，包含：
+   - ENUM 类型定义: project_stage, image_status, video_status
+   - projects 表: id, user_id, title, story, style, stage, created_at, updated_at
+   - scenes 表: 包含确认状态字段 (description_confirmed, image_confirmed, video_confirmed)
+   - images 表: id, scene_id, storage_path, url, width, height, version, created_at
+   - videos 表: id, scene_id, storage_path, url, duration, task_id, version, created_at
+   - 外键关系: projects → scenes → images/videos (级联删除)
+   - 索引优化: user_id, project_id, scene_id, order_index, task_id, status 字段
+   - Row Level Security (RLS) 策略: 用户只能访问自己的数据
+   - Storage bucket: project-media (私有，用户只能访问自己文件夹)
+   - 自动更新 updated_at 的触发器
+
+3. **创建 src/types/database.ts**:
+   - 定义所有表类型: projects, scenes, images, videos
+   - 定义枚举类型: ProjectStage, ImageStatus, VideoStatus
+   - 提供便捷类型: Project, Scene, Image, Video 等
+   - 定义嵌套类型: SceneWithMedia, ProjectWithScenes
+
+### Testing:
+- ✅ npm run lint 通过
+- ✅ npm run build 构建成功
+
+### Notes:
+- SQL 文件可直接在 Supabase SQL Editor 中执行
+- RLS 策略确保数据安全，用户只能操作自己的项目
+- Storage bucket 使用用户 ID 作为文件夹名进行隔离
+
+---
+
 ## 2026-02-14 - 项目重新构建 + Task 1: 项目基础配置
 
 ### What was done:
