@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git restore .)",
+      "Bash(rm -rf hello-nextjs)",
+      "Bash(npx create-next-app@latest hello-nextjs --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --yes)",
+      "Bash(npm install @supabase/supabase-js @supabase/ssr clsx tailwind-merge)",
+      "Bash(mkdir -p \"C:\\Users\\13374\\IdeaProjects\\auto-coding-agent-demo\\hello-nextjs\\src\\lib\")",
+      "Bash(npm run lint)",
+      "Bash(npm run build)",
+      "Bash(git add .)",
+      "Bash(git commit -m \"$(cat <<''EOF''\n项目重新构建 + Task 1: 项目基础配置\n\n- 删除旧的 hello-nextjs/ 并重新创建\n- 安装 Supabase 和 UI 依赖\n- 创建 .env.local.example 和 utils.ts\n- 重置 task.json 所有任务状态\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

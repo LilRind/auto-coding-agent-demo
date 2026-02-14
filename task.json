@@ -29,7 +29,7 @@
         "创建 Storage bucket: project-media",
         "编写 SQL migration 文件到 supabase/migrations/"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 3,
@@ -41,7 +41,7 @@
         "创建 lib/supabase/middleware.ts (中间件)",
         "更新 middleware.ts 集成 Supabase 中间件"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 4,
@@ -54,7 +54,7 @@
         "登录成功后跳转到首页",
         "显示登录错误信息"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 5,
@@ -67,7 +67,7 @@
         "注册成功后跳转到登录页",
         "显示注册错误信息"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 6,
@@ -78,7 +78,7 @@
         "实现登出逻辑",
         "登出后跳转到登录页"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 7,
@@ -89,7 +89,7 @@
         "未登录用户访问受保护页面时重定向到 /login",
         "已登录用户访问 /login 和 /register 时重定向到首页"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 8,
@@ -102,7 +102,7 @@
         "编写 story-to-scenes prompt 模板",
         "创建 types/ai.ts 定义类型"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 9,
@@ -114,7 +114,7 @@
         "实现错误处理和重试逻辑",
         "添加类型定义"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 10,
@@ -127,7 +127,7 @@
         "实现错误处理和重试逻辑",
         "添加类型定义"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 11,
@@ -142,7 +142,7 @@
         "实现 updateProjectStage() 更新项目阶段",
         "实现 deleteProject() 删除项目"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 12,
@@ -161,7 +161,7 @@
         "实现 confirmAllVideos() 确认所有分镜视频",
         "实现 deleteScenesByProjectId() 删除项目的所有分镜（重新生成时用）"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 13,
@@ -175,7 +175,7 @@
         "实现 Supabase Storage 上传功能",
         "实现 Supabase Storage 删除功能（重新生成时清理旧文件）"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 14,
@@ -191,7 +191,7 @@
         "DELETE /api/projects/:id 删除项目",
         "验证用户是项目所有者"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 15,
@@ -209,7 +209,7 @@
         "创建 app/api/generate/scenes/regenerate/route.ts",
         "POST 重新生成分镜（流程同上）"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 16,
@@ -227,7 +227,7 @@
         "遍历所有 description_confirmed=true 且 image_status=pending 的分镜",
         "更新项目 stage 为 'images'"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 17,
@@ -248,7 +248,7 @@
         "POST /api/generate/videos 批量创建所有分镜视频任务",
         "更新项目 stage 为 'videos'"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 18,
@@ -268,7 +268,7 @@
         "创建 app/api/scenes/confirm-all-videos/route.ts",
         "POST 确认所有分镜视频，更新项目 stage 为 'completed'"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 19,
@@ -282,7 +282,7 @@
         "顶部导航栏（登录状态、用户信息、登出按钮）",
         "创建 components/layout/Header.tsx 导航栏组件"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 20,
@@ -296,7 +296,7 @@
         "添加「创建新项目」按钮",
         "支持分页加载"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 21,
@@ -310,7 +310,7 @@
         "提交按钮",
         "提交后创建项目并跳转到详情页"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 22,
@@ -324,7 +324,7 @@
         "高亮当前阶段，已完成阶段显示勾选",
         "添加返回项目列表的链接"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 23,
@@ -340,7 +340,7 @@
         "底部显示「确认所有分镜」按钮",
         "确认后进入图片生成阶段"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 24,
@@ -356,7 +356,7 @@
         "底部显示「确认所有图片」按钮",
         "确认后进入视频生成阶段"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 25,
@@ -373,7 +373,7 @@
         "底部显示「确认所有视频」按钮",
         "确认后项目完成"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 26,
@@ -385,7 +385,7 @@
         "显示项目完成时间",
         "可重新进入任意阶段修改"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 27,
@@ -397,7 +397,7 @@
         "状态变化时自动更新 UI",
         "显示进度条或加载动画"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 28,
@@ -411,7 +411,7 @@
         "前端显示友好的错误提示（Toast 组件）",
         "生成失败时显示错误信息和重试按钮"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 29,
@@ -425,7 +425,7 @@
         "在详情页使用加载状态",
         "生成过程中显示加载动画"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 30,
@@ -439,7 +439,7 @@
         "阶段指示器响应式布局",
         "测试不同屏幕尺寸"
       ],
-      "passes": true
+      "passes": false
     },
     {
       "id": 31,
@@ -453,7 +453,7 @@
         "测试错误处理",
         "性能优化（图片懒加载等）"
       ],
-      "passes": true
+      "passes": false
     }
   ]
 }
