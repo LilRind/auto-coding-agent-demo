@@ -1,5 +1,35 @@
 # Progress Log
 
+## 2026-02-14 - Task 3: Supabase 客户端封装
+
+### What was done:
+1. **创建 src/lib/supabase/server.ts**:
+   - 使用 createServerClient 和 cookies() 创建服务端客户端
+   - 适用于 Server Components, Server Actions, Route Handlers
+
+2. **创建 src/lib/supabase/client.ts**:
+   - 使用 createBrowserClient 创建浏览器客户端
+   - 适用于 Client Components
+
+3. **创建 src/lib/supabase/middleware.ts**:
+   - 提供 updateSession 函数处理 session refresh
+   - 保护路由: /projects, /create
+   - 未登录用户重定向到 /login
+   - 已登录用户访问 /login, /register 时重定向到首页
+
+4. **创建 src/middleware.ts**:
+   - 集成 Supabase 中间件
+
+### Testing:
+- ✅ npm run lint 通过
+- ✅ npm run build 构建成功
+
+### Notes:
+- 中间件有 deprecation 警告（Next.js 16 建议使用 proxy），但仍可用
+- 中间件已实现基本的认证保护逻辑
+
+---
+
 ## 2026-02-14 - Task 2: Supabase 数据库 Schema
 
 ### What was done:
