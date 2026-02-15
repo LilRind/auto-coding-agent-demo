@@ -227,7 +227,7 @@
         "遍历所有 description_confirmed=true 且 image_status=pending 的分镜",
         "更新项目 stage 为 'images'"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 17,
