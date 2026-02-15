@@ -191,7 +191,7 @@
         "DELETE /api/projects/:id 删除项目",
         "验证用户是项目所有者"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 15,
