@@ -282,7 +282,7 @@
         "顶部导航栏（登录状态、用户信息、登出按钮）",
         "创建 components/layout/Header.tsx 导航栏组件"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 20,

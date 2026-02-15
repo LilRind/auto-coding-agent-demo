@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Providers } from "@/components/providers/Providers";
 
 export const metadata: Metadata = {
   title: "Spring FES Video",
@@ -14,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" className="dark">
       <body className="antialiased bg-gray-900 text-white">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

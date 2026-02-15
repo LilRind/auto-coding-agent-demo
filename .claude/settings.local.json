@@ -14,7 +14,9 @@
       "Bash(git commit -m \"$(cat <<''EOF''\nTask 3: Supabase 客户端封装\n\n- 创建 src/lib/supabase/server.ts 服务端客户端\n- 创建 src/lib/supabase/client.ts 浏览器客户端\n- 创建 src/lib/supabase/middleware.ts 中间件\n- 创建 src/middleware.ts 认证保护\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git push)",
       "Bash(mkdir:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npm install:*)",
+      "Bash(npm uninstall:*)"
     ],
     "deny": [],
     "ask": []
