@@ -102,7 +102,7 @@
         "编写 story-to-scenes prompt 模板",
         "创建 types/ai.ts 定义类型"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 9,
@@ -114,7 +114,7 @@
         "实现错误处理和重试逻辑",
         "添加类型定义"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 10,
@@ -127,7 +127,7 @@
         "实现错误处理和重试逻辑",
         "添加类型定义"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 11,
@@ -142,7 +142,7 @@
         "实现 updateProjectStage() 更新项目阶段",
         "实现 deleteProject() 删除项目"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 12,
@@ -161,7 +161,7 @@
         "实现 confirmAllVideos() 确认所有分镜视频",
         "实现 deleteScenesByProjectId() 删除项目的所有分镜（重新生成时用）"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 13,
@@ -175,7 +175,7 @@
         "实现 Supabase Storage 上传功能",
         "实现 Supabase Storage 删除功能（重新生成时清理旧文件）"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 14,
