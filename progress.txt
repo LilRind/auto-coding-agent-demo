@@ -1,5 +1,40 @@
 # Progress Log
 
+## 2026-02-15 - Task 4-7: 用户认证
+
+### What was done:
+**Task 4 - 登录页面:**
+- 创建 app/login/page.tsx 登录页面
+- 创建 components/auth/LoginForm.tsx 登录表单组件
+- 使用 Suspense 包裹 useSearchParams
+- 中文错误信息显示
+
+**Task 5 - 注册页面:**
+- 创建 app/register/page.tsx 注册页面
+- 创建 components/auth/RegisterForm.tsx 注册表单组件
+- 密码确认验证
+- 注册成功后自动跳转
+
+**Task 6 - 登出功能:**
+- 创建 components/auth/LogoutButton.tsx 登出按钮组件
+- 登出后跳转到登录页
+
+**Task 7 - 认证保护中间件:**
+- 已在 Task 3 中实现
+- 保护路由: /projects, /create
+- 未登录重定向到 /login
+- 已登录访问 /login, /register 重定向到首页
+
+### Testing:
+- ✅ npm run lint 通过
+- ✅ npm run build 构建成功
+
+### Notes:
+- 使用 Suspense 包裹 useSearchParams 解决 SSR 问题
+- 移除了 Google Fonts 依赖，使用系统字体
+
+---
+
 ## 2026-02-14 - Task 3: Supabase 客户端封装
 
 ### What was done:

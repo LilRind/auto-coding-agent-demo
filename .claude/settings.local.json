@@ -12,7 +12,9 @@
       "Bash(git commit -m \"$(cat <<''EOF''\n项目重新构建 + Task 1: 项目基础配置\n\n- 删除旧的 hello-nextjs/ 并重新创建\n- 安装 Supabase 和 UI 依赖\n- 创建 .env.local.example 和 utils.ts\n- 重置 task.json 所有任务状态\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git commit -m \"$(cat <<''EOF''\nTask 2: Supabase 数据库 Schema\n\n- 创建 supabase/migrations/001_initial_schema.sql\n- 定义 projects, scenes, images, videos 表结构\n- 添加 RLS 策略和索引\n- 创建 Storage bucket\n- 创建 src/types/database.ts 类型定义\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git commit -m \"$(cat <<''EOF''\nTask 3: Supabase 客户端封装\n\n- 创建 src/lib/supabase/server.ts 服务端客户端\n- 创建 src/lib/supabase/client.ts 浏览器客户端\n- 创建 src/lib/supabase/middleware.ts 中间件\n- 创建 src/middleware.ts 认证保护\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(mkdir:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

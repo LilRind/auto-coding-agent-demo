@@ -54,7 +54,7 @@
         "登录成功后跳转到首页",
         "显示登录错误信息"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 5,
@@ -67,7 +67,7 @@
         "注册成功后跳转到登录页",
         "显示注册错误信息"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 6,
@@ -78,7 +78,7 @@
         "实现登出逻辑",
         "登出后跳转到登录页"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 7,
@@ -89,7 +89,7 @@
         "未登录用户访问受保护页面时重定向到 /login",
         "已登录用户访问 /login 和 /register 时重定向到首页"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": 8,
