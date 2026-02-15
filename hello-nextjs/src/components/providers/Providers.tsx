@@ -1,6 +1,7 @@
 'use client';
 
 import { Header } from '@/components/layout/Header';
+import { ToastProvider } from '@/components/ui/Toast';
 import { usePathname } from 'next/navigation';
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -8,11 +9,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const isAuthPage = pathname === '/login' || pathname === '/register';
 
   return (
-    <>
+    <ToastProvider>
       {!isAuthPage && <Header />}
       <main className={isAuthPage ? '' : 'min-h-[calc(100vh-64px)]'}>
         {children}
       </main>
-    </>
+    </ToastProvider>
   );
 }
