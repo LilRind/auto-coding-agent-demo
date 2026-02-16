@@ -1,5 +1,30 @@
 # Progress Log
 
+## 2026-02-16 - 最终测试和 SceneVideoCard 修复
+
+### What was done:
+- 修复 SceneVideoCard.tsx 中的 useEffect 依赖警告
+- 使用 useRef 和正确的依赖数组解决 React hooks 警告
+- 运行完整的 lint 和 build 验证
+- 服务端测试通过：
+  - 首页 200 OK
+  - 登录页 200 OK
+  - 注册页 200 OK
+  - /create 和 /projects 正确重定向到 /login (307)
+  - 16 个 API 端点正常注册
+
+### Testing:
+- ✅ npm run lint 通过（0 errors, 0 warnings）
+- ✅ npm run build 成功
+- ✅ 开发服务器正常运行
+- ✅ 路由保护正常工作
+
+### Notes:
+- 所有 31 个任务已完成
+- 完整用户流程需要真实 Supabase 项目和 API 密钥才能测试
+
+---
+
 ## 2026-02-15 - Task 4-7: 用户认证
 
 ### What was done:

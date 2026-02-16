@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { SceneWithMedia } from '@/types/database';
@@ -35,21 +35,31 @@ export function SceneVideoCard({
   const [loading, setLoading] = useState(false);
   const latestImage = scene.images[0];
   const latestVideo = scene.videos[0];
-
-  const currentTask =
-    scene.video_status === 'processing' && latestVideo?.task_id
-      ? { taskId: latestVideo.task_id, videoId: latestVideo.id }
-      : null;
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (!currentTask || scene.video_status !== 'processing') return;
+    if (scene.video_status !== 'processing' || !latestVideo?.task_id) {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+      return;
+    }
 
-    const interval = setInterval(async () => {
-      await onCheckStatus(currentTask.taskId, currentTask.videoId);
+    const taskId = latestVideo.task_id;
+    const videoId = latestVideo.id;
+
+    intervalRef.current = setInterval(async () => {
+      await onCheckStatus(taskId, videoId);
     }, 5000);
 
-    return () => clearInterval(interval);
-  }, [currentTask, scene.video_status, onCheckStatus]);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [scene.video_status, latestVideo?.task_id, latestVideo?.id, onCheckStatus]);
 
   const handleGenerate = async () => {
     setLoading(true);
