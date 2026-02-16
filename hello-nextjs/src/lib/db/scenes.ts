@@ -53,6 +53,8 @@ export async function getScenesByProjectId(projectId: string): Promise<Scene[]> 
   return (data || []) as Scene[];
 }
 
+const BUCKET_NAME = 'project-media';
+
 export async function getScenesWithMediaByProjectId(projectId: string): Promise<SceneWithMedia[]> {
   const supabase = await createClient();
 
@@ -74,10 +76,46 @@ export async function getScenesWithMediaByProjectId(projectId: string): Promise<
         supabase.from('videos').select('*').eq('scene_id', sceneData.id).order('version', { ascending: false }),
       ]);
 
+      const images = (imagesResult.data || []) as Image[];
+      const videos = (videosResult.data || []) as Video[];
+
+      const imagesWithSignedUrls = await Promise.all(
+        images.map(async (img) => {
+          if (img.storage_path && (!img.url || img.url.includes('/object/public/'))) {
+            console.log(`[getScenesWithMedia] Creating signed URL for image: ${img.storage_path}`);
+            const { data, error } = await supabase.storage
+              .from(BUCKET_NAME)
+              .createSignedUrl(img.storage_path, 60 * 60 * 24 * 365);
+            if (error) {
+              console.error(`[getScenesWithMedia] Error creating signed URL: ${error.message}`);
+            }
+            if (data?.signedUrl) {
+              console.log(`[getScenesWithMedia] Signed URL created: ${data.signedUrl.substring(0, 100)}...`);
+              return { ...img, url: data.signedUrl };
+            }
+          }
+          return img;
+        })
+      );
+
+      const videosWithSignedUrls = await Promise.all(
+        videos.map(async (vid) => {
+          if (vid.storage_path && (!vid.url || vid.url.includes('/object/public/'))) {
+            const { data } = await supabase.storage
+              .from(BUCKET_NAME)
+              .createSignedUrl(vid.storage_path, 60 * 60 * 24 * 365);
+            if (data?.signedUrl) {
+              return { ...vid, url: data.signedUrl };
+            }
+          }
+          return vid;
+        })
+      );
+
       return {
         ...sceneData,
-        images: (imagesResult.data || []) as Image[],
-        videos: (videosResult.data || []) as Video[],
+        images: imagesWithSignedUrls,
+        videos: videosWithSignedUrls,
       };
     })
   );

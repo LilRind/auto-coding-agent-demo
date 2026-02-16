@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import { getProjectById, ProjectError } from '@/lib/db/projects';
+import { getProjectById, updateProjectStage, ProjectError } from '@/lib/db/projects';
 import { confirmAllImages } from '@/lib/db/scenes';
 
 export async function POST(request: NextRequest) {
@@ -23,6 +23,7 @@ export async function POST(request: NextRequest) {
 
     await getProjectById(projectId, user.id);
     await confirmAllImages(projectId);
+    await updateProjectStage(projectId, user.id, 'videos');
 
     return NextResponse.json({ success: true });
   } catch (error) {

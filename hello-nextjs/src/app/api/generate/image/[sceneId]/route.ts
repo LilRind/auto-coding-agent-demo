@@ -33,7 +33,12 @@ export async function POST(
     await updateSceneImageStatus(sceneId, 'processing');
 
     try {
+      console.log(`[generate/image/${sceneId}] Starting image generation...`);
+      console.log(`[generate/image/${sceneId}] Description: ${scene.description.substring(0, 100)}...`);
+      console.log(`[generate/image/${sceneId}] Style: ${project.style}`);
+      
       const imageBuffer = await generateImageBuffer(scene.description, project.style as VideoStyle);
+      console.log(`[generate/image/${sceneId}] Image generated, size: ${imageBuffer.length} bytes`);
 
       const fileName = `scene-${scene.order_index}-${Date.now()}.png`;
       const { path, url } = await downloadAndUpload(
@@ -43,6 +48,7 @@ export async function POST(
         fileName,
         'image/png'
       );
+      console.log(`[generate/image/${sceneId}] Uploaded to: ${path}`);
 
       await deleteImagesBySceneId(sceneId);
 
@@ -52,6 +58,7 @@ export async function POST(
 
       return NextResponse.json({ success: true, url });
     } catch (genError) {
+      console.error(`[generate/image/${sceneId}] Error:`, genError);
       await updateSceneImageStatus(sceneId, 'failed');
       throw genError;
     }

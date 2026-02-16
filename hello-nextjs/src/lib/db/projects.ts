@@ -74,6 +74,8 @@ export async function getProjects(
   return { projects: (projects || []) as Project[], total: count || 0 };
 }
 
+const BUCKET_NAME = 'project-media';
+
 export async function getProjectById(
   projectId: string,
   userId: string
@@ -117,10 +119,41 @@ export async function getProjectById(
         supabase.from('videos').select('*').eq('scene_id', sceneData.id).order('version', { ascending: false }),
       ]);
 
+      const images = (imagesResult.data || []) as Image[];
+      const videos = (videosResult.data || []) as Video[];
+
+      const imagesWithSignedUrls = await Promise.all(
+        images.map(async (img) => {
+          if (img.storage_path && (!img.url || img.url.includes('/object/public/'))) {
+            const { data, error } = await supabase.storage
+              .from(BUCKET_NAME)
+              .createSignedUrl(img.storage_path, 60 * 60 * 24 * 365);
+            if (data?.signedUrl) {
+              return { ...img, url: data.signedUrl };
+            }
+          }
+          return img;
+        })
+      );
+
+      const videosWithSignedUrls = await Promise.all(
+        videos.map(async (vid) => {
+          if (vid.storage_path && (!vid.url || vid.url.includes('/object/public/'))) {
+            const { data } = await supabase.storage
+              .from(BUCKET_NAME)
+              .createSignedUrl(vid.storage_path, 60 * 60 * 24 * 365);
+            if (data?.signedUrl) {
+              return { ...vid, url: data.signedUrl };
+            }
+          }
+          return vid;
+        })
+      );
+
       return {
         ...sceneData,
-        images: (imagesResult.data || []) as Image[],
-        videos: (videosResult.data || []) as Video[],
+        images: imagesWithSignedUrls,
+        videos: videosWithSignedUrls,
       };
     })
   );

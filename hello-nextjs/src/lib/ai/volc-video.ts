@@ -160,7 +160,7 @@ export async function waitForVideoTask(
     }
 
     if (status.status === 'succeeded') {
-      const videoUrl = status.output?.video_url;
+      const videoUrl = status.content?.video_url;
       if (!videoUrl) {
         throw new Error('Video task succeeded but no video URL');
       }

@@ -32,9 +32,9 @@ export async function GET(
 
     const status = await getVideoTaskStatus(taskId);
 
-    if (status.status === 'succeeded' && status.output?.video_url) {
+    if (status.status === 'succeeded' && status.content?.video_url) {
       try {
-        const videoBuffer = await downloadVideo(status.output.video_url);
+        const videoBuffer = await downloadVideo(status.content.video_url);
 
         const fileName = `video-${scene.order_index}-${Date.now()}.mp4`;
         const { path, url } = await downloadAndUpload(

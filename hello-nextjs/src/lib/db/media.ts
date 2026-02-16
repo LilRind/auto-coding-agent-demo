@@ -203,8 +203,11 @@ export async function uploadFile(
     throw new MediaError(`Failed to upload file: ${uploadError.message}`, 'storage_error');
   }
 
-  const { data } = supabase.storage.from(BUCKET_NAME).getPublicUrl(path);
-  return { path, url: data.publicUrl };
+  const { data, error } = await supabase.storage.from(BUCKET_NAME).createSignedUrl(path, 60 * 60 * 24 * 365);
+  if (error) {
+    throw new MediaError(`Failed to create signed URL: ${error.message}`, 'storage_error');
+  }
+  return { path, url: data.signedUrl };
 }
 
 export async function getSignedUrl(path: string, expiresIn: number = 3600): Promise<string> {

@@ -72,7 +72,7 @@ export interface VolcVideoTaskStatusResponse {
   status: 'pending' | 'running' | 'succeeded' | 'failed';
   model: string;
   created_at: number;
-  output?: {
+  content?: {
     video_url?: string;
   };
   error?: string;

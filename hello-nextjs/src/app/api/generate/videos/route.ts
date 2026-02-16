@@ -27,9 +27,16 @@ export async function POST(request: NextRequest) {
     const project = await getProjectById(projectId, user.id);
     const scenes = await getScenesByProjectId(projectId);
 
+    console.log(`[generate/videos] Total scenes: ${scenes.length}`);
+    scenes.forEach((s, i) => {
+      console.log(`  Scene ${i}: id=${s.id}, image_confirmed=${s.image_confirmed}, video_status=${s.video_status}`);
+    });
+
     const scenesToGenerate = scenes.filter(
-      (s) => s.image_confirmed && s.video_status === 'pending'
+      (s) => s.image_confirmed && (s.video_status === 'pending' || s.video_status === 'failed')
     );
+
+    console.log(`[generate/videos] Scenes to generate: ${scenesToGenerate.length}`);
 
     if (scenesToGenerate.length === 0) {
       return NextResponse.json({ message: 'No scenes to generate', tasks: [] });
@@ -46,11 +53,14 @@ export async function POST(request: NextRequest) {
       await updateSceneVideoStatus(scene.id, 'processing');
 
       try {
+        console.log(`[generate/videos] Creating video task for scene ${scene.id}...`);
         const taskId = await createVideoTask(signedUrl, scene.description, project.style as VideoStyle);
+        console.log(`[generate/videos] Task created: ${taskId}`);
         const video = await createVideo(scene.id, '', '', undefined, taskId);
 
         tasks.push({ sceneId: scene.id, taskId, videoId: video.id });
-      } catch {
+      } catch (videoError) {
+        console.error(`[generate/videos] Failed to create video task for scene ${scene.id}:`, videoError);
         await updateSceneVideoStatus(scene.id, 'failed');
       }
     }
